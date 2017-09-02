@@ -36,14 +36,23 @@
     @warn '$turn-origin must be either "from-back" or "from-front"';
   }
 
+  // Rotation end
+  $rotations-end: (
+    top: rotateX(0deg),
+    right: rotateY(0deg),
+    bottom: rotateX(0deg),
+    left: rotateY(0deg),
+  );
+  $rotation-end: map-get($rotations-end, $from);
+
   // Start and end state
   $start: '';
   $end: '';
   @if $state == in {
     $start: perspective($perspective) $rotation;
-    $end: perspective($perspective) rotate(0deg);
+    $end: perspective($perspective) $rotation-end;
   } @else {
-    $start: perspective($perspective) rotate(0deg);
+    $start: perspective($perspective) $rotation-end;
     $end: perspective($perspective) $rotation;
   }
 
